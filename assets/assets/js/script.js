@@ -1,3 +1,5 @@
+document.addEventListener('DOMContentLoaded', function () {
+
 const questions = [{
         question: 'Commonly used data types DO NOT include:',
         a: '1. Strings',
@@ -40,14 +42,14 @@ const questions = [{
     },
 ];
 
-const clickStart = document.getElementById('start-quiz');
 
-const timerEl = document.getElementById('timer');
-const timeRemaining = 60;
-const questionContainer = document.querySelector('#quiz-container');
+var clickStart = document.getElementById("start");
+var timerEl = document.getElementById("timer");
+var timeRemaining = 60;
+var questionContainer = document.querySelector("#quiz-container");
 
 function timer () {
-    timerEl.textContent = 'Time Remaining: ' + timeRemaining + 's';
+    timerEl.textContent = ' ' + timeRemaining + 's';
     quizDuration = setInterval(function() {
         if (timeRemaining > 0) { 
             adjustTime(-1);
@@ -62,33 +64,33 @@ function adjustTime(amount) {
     if (timeRemaining < 0) {
         timeRemaining = 0;
     }
-    timerEl.textContent = 'Time Remaining: ' + timeRemaining + 's';
+    timerEl.textContent = ' ' + timeRemaining + 's';
 }
 
 clickStart.onclick = timer; 
-const renderQuestion = function (question) {
+var renderQuestion = function (question) {
     questionContainer.innerHTML = '';
 
-    const questionHeader = document.createElement('h2');
+    var questionHeader = document.createElement('h2');
     questionHeader.textContent = questions.question;
 
-    const answerA = document.createElement('button');
+    var answerA = document.createElement('button');
     answerA.textContent = question.c;
     answerA.addEventListener ('click', answerClick)
 
-    const answerB = document.createElement('button');
+    var answerB = document.createElement('button');
     answerB.textContent = question.c;
     answerB.addEventListener ('click', answerClick)
 
-    const answerC = document.createElement('button');
+    var answerC = document.createElement('button');
     answerC.textContent = question.d;
     answerC.addEventListener ('click', answerClick)
 
-    const answerD = document.createElement('button');
+    var answerD = document.createElement('button');
     answerD.textContent = question.c;
     answerD.addEventListener ('click', answerClick)
 
-    const answerE = document.createElement('button');
+    var answerE = document.createElement('button');
     answerE.textContent = question.d;
     answerE.addEventListener ('click', answerClick)
 
@@ -103,13 +105,13 @@ const renderQuestion = function (question) {
 let currentQuestionIndex = 0;
 let userScore = 0;
 let correctAnswer = questions[currentQuestionIndex].answer;
-const clickHighScores = document.getElementById('high-scores');
+var clickHighScores = document.getElementById('high-scores');
 
-const answerClick = function(event) {
+var answerClick = function(event) {
     event.preventDefault();
-    const userAnswer = event.target.textContent;
+    var userAnswer = event.target.textContent;
     correctAnswer = questions[currentQuestionIndex].answer;
-    const answerDetermination = document.querySelector('#answer-determination');
+    var answerDetermination = document.querySelector('#answer-determination');
 
     if (userAnswer !== correctAnswer) {
         adjustTime(-10);
@@ -122,11 +124,72 @@ const answerClick = function(event) {
 }
 };
 
-const quiz = function (event) { 
+var quiz = function (event) { 
     event.preventDefault();
     resetDisplay();
     renderQuestion(questions[currentQuestionIndex]);
     timer();
+};function resetDisplay() {
+    questionContainer.innerHTML = '';
+    document.getElementById('homepage').style.display = 'none';
 };
 
+function highScores() {
+    var data = localStorage.getItem('object');
+    var getData = JSON.parse(data);
+    var name = getData.name;
+    var score = getData.score;
+    questionContainer.innerHTML = '';
+    questionContainer.innerHTML = name + ' ' + score;
+};
 
+clickHighScores.addEventListener('click', () =>
+    { highScores ();
+})
+
+var initials = ''; 
+function endQuizPage () {
+    resetDisplay();
+    timerEl.textContent = '';
+    clearInterval(quizDuration);
+    var endPage = document.createElement ('h2');
+    questionContainer.appendChild(endPage);
+
+    var blank = document.querySelector('answer-determination');
+    blank.innerHTML = '';
+
+    endPage.innerHTML = 'All done! Your final score is ' + 'userScore + .' + 'Enter your initials to save (max 3)';
+
+    var initialBox = document.createElement('input');
+    blank.appendChild(initialBox);
+
+    var submitInitialBtn= document.createElement('button');
+    submitInitialBtn.textContent= 'Submit';
+    blank.appendChild(submitInitialBtn);
+
+    submitInitialBtn.addEventListener('click', () =>
+    { if (initialBox.value.length === 0) return false;
+        var storeInitials = (input) =>
+        {
+            var data = JSON.stringify({ "name":input[0], "score":input[1]})
+            localStorage.setItem('object', data)
+        }
+        storeInitials(initialBox.value, userScore);
+
+        var playAgain = document.createElement('button');
+        playAgain.textContent = 'Play Again!'; 
+        blank.appendChild(playAgain);
+
+        playAgain.addEventListener('click', () =>
+       {location.reload()
+    })
+    })
+
+    document.querySelector('input').value = '';
+    initialBox.addEventListener('submit', change);
+};
+
+clickStart.addEventListener('click', quiz); 
+
+
+});
