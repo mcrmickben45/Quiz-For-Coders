@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', function () {
 
 const questions = [{
-        question: 'Commonly used data types DO NOT include:',
+        q: 'Commonly used data types DO NOT include:',
         a: '1. Strings',
         b: '2. Booleans',
         c: '3. Alerts',
@@ -9,7 +9,7 @@ const questions = [{
         answer: '3. Alerts',
     },
     {
-        question: 'The condition in an if / else statement is enclosed with ____',
+        q: 'The condition in an if / else statement is enclosed with ____',
         a: '1. Quotes',
         b: '2. Curly Brackets',
         c: '3. Parenthesis',
@@ -17,7 +17,7 @@ const questions = [{
         answer: '3. Parenthesis',
     },
     {
-        question: 'Arrays in JavaScript can be used to store ____.',
+        q: 'Arrays in JavaScript can be used to store ____.',
         a: '1. Numbers and Strings',
         b: '2. Other Arrays',
         c: '3. Booleans',
@@ -25,7 +25,7 @@ const questions = [{
         answer: '4. All of the Above',
     },    
     {
-        question: 'String values must be enclosed within ____ when being assigned to variables',
+        q: 'String values must be enclosed within ____ when being assigned to variables',
         a: '1. Commas',
         b: '2. Curly Brackets',
         c: '3. Quotes',
@@ -33,7 +33,7 @@ const questions = [{
         answer: '3. Quotes',
     },
     {
-        question: 'A very useful tool used during development and debugging for prionting content to the debugger is:',
+        q: 'A very useful tool used during development and debugging for prionting content to the debugger is:',
         a: '1. JavaScript',
         b: '2. Terminal/Bash',
         c: '3. For Loops',
@@ -67,73 +67,71 @@ function adjustTime(amount) {
     timerEl.textContent = ' ' + timeRemaining + 's';
 }
 
-clickStart.onclick = timer; 
+clickStart.onclick = timer;
 var renderQuestion = function (question) {
-    questionContainer.innerHTML = '';
+    questionContainer.innerHTML = "";
 
-    var questionHeader = document.createElement('h2');
-    questionHeader.textContent = questions.question;
+    var questionHeader = document.createElement("h2");
+    questionHeader.textContent = question.q;
 
-    var answerA = document.createElement('button');
-    answerA.textContent = question.c;
-    answerA.addEventListener ('click', answerClick)
+    var answerA = document.createElement("button");
+    answerA.textContent = question.a;
+    answerA.addEventListener("click", answerClick);
 
-    var answerB = document.createElement('button');
-    answerB.textContent = question.c;
-    answerB.addEventListener ('click', answerClick)
+    var answerB = document.createElement("button");
+    answerB.textContent = question.b;
+    answerB.addEventListener("click", answerClick);
 
-    var answerC = document.createElement('button');
-    answerC.textContent = question.d;
-    answerC.addEventListener ('click', answerClick)
+    var answerC = document.createElement("button");
+    answerC.textContent = question.c;
+    answerC.addEventListener("click", answerClick);
 
-    var answerD = document.createElement('button');
-    answerD.textContent = question.c;
-    answerD.addEventListener ('click', answerClick)
+    var answerD = document.createElement("button");
+    answerD.textContent = question.d;
+    answerD.addEventListener("click", answerClick);
 
-    var answerE = document.createElement('button');
-    answerE.textContent = question.d;
-    answerE.addEventListener ('click', answerClick)
+    var answerE = document.createElement("button");
+    answerE.textContent = question.e;
+    answerE.addEventListener("click", answerClick);
 
     questionContainer.appendChild(questionHeader);
     questionContainer.appendChild(answerA);
     questionContainer.appendChild(answerB);
     questionContainer.appendChild(answerC);
     questionContainer.appendChild(answerD);
-    questionContainer.appendChild(answerE);
-};
+}
 
-let currentQuestionIndex = 0;
-let userScore = 0;
-let correctAnswer = questions[currentQuestionIndex].answer;
-var clickHighScores = document.getElementById('high-scores');
+var currentQuestionIndex = 0;
+var userScore = 0;
+var correctAnswer = questions[currentQuestionIndex].correct;
+var clickViewScores = document.getElementById("view-score");
 
 var answerClick = function(event) {
     event.preventDefault();
     var userAnswer = event.target.textContent;
-    correctAnswer = questions[currentQuestionIndex].answer;
-    var answerDetermination = document.querySelector('#answer-determination');
-
+    correctAnswer = questions[currentQuestionIndex].correct;
+    // determine if answer is wrong or right
+    var answerDetermination = document.querySelector("#answer-determination");
     if (userAnswer !== correctAnswer) {
         adjustTime(-10);
-        answerDetermination.textContent = 'Wrong!';
-        currentQuestionIndex++; 
-    if (currentQuestionIndex >= questions.length) {
+        answerDetermination.textContent = "Wrong!";
+        currentQuestionIndex++;
+        if (currentQuestionIndex >= questions.length) {
             endQuizPage();
         } else {renderQuestion(questions[currentQuestionIndex])};
-
-}
+    }
 };
 
-var quiz = function (event) { 
+var quiz = function (event) {
     event.preventDefault();
     resetDisplay();
     renderQuestion(questions[currentQuestionIndex]);
-    timer();
-};function resetDisplay() {
-    questionContainer.innerHTML = '';
-    document.getElementById('homepage').style.display = 'none';
 };
 
+function resetDisplay() {
+    questionContainer.innerHTML=" ";
+    document.querySelector("#homepage").style.display = "none";
+}
 function highScores() {
     var data = localStorage.getItem('object');
     var getData = JSON.parse(data);
@@ -143,6 +141,14 @@ function highScores() {
     questionContainer.innerHTML = name + ' ' + score;
 };
 
+function highScores() {
+    let data = localStorage.getItem("object");
+    let getData = JSON.parse(data);
+    let name = getData.name;
+    let score = getData.score;
+    questionContainer.innerHTML = " ";
+    questionContainer.innerHTML = name + " " + score;
+}
 clickHighScores.addEventListener('click', () =>
     { highScores ();
 })
@@ -190,6 +196,5 @@ function endQuizPage () {
 };
 
 clickStart.addEventListener('click', quiz); 
-
-
 });
+
