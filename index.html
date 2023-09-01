@@ -10,20 +10,20 @@
 
 <body>
     <div>
-        <button class = "high-scores" id = "high-scores">View High Scores</button>
+        <button class = "scores">View High Scores <span id = "high-scores"></span></button>
     </div>
-    <div id = "homepage">
+
+    <div>
+        <button class = "timer">Time: <span id="timer">0</span></button>
+    </div>
+
+    <div class = "wrapper">
+        <div id = "homepage" class = "start">
     <h1>Coding Quiz Challenge</h1>
     <p>
       Try to answer the following code-related questions within the time limit. Keep in mind that incorrect answers will penalize your score/time by ten seconds!
     </p>
-    <button id="start-quiz">Start Quiz</button>
-
-    </div>
-
-    <h2 id="timer"></h2>
-        <div class='quiz-container' id='quiz-container'></div>
-        <div id ='answer-determination'></div>
+    <button id = "start">Start Quiz</button>
 
     <script src="./assets/assets/js/script.js"></script>
 

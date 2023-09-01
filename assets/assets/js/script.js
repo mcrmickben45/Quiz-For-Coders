@@ -33,7 +33,7 @@ const questions = [{
     {
         question: 'A very useful tool used during development and debugging for prionting content to the debugger is:',
         a: '1. JavaScript',
-        b:  '2. Terminal/Bash',
+        b: '2. Terminal/Bash',
         c: '3. For Loops',
         d: '4. console.log',
         answer: '4. console.log',
@@ -129,64 +129,4 @@ const quiz = function (event) {
     timer();
 };
 
-function resetDisplay() {
-    questionContainer.innerHTML = '';
-    document.getElementById('homepage').style.display = 'none';
-};
 
-function highScores() {
-    const data = localStorage.getItem('object');
-    const getData = JSON.parse(data);
-    const name = getData.name;
-    const score = getData.score;
-    questionContainer.innerHTML = '';
-    questionContainer.innerHTML = name + ' ' + score;
-};
-
-clickHighScores.addEventListener('click', () =>
-    { highScores ();
-})
-
-const initials = ''; 
-function endQuizPage () {
-    resetDisplay();
-    timerEl.textContent = '';
-    clearInterval(quizDuration);
-    const endPage = document.createElement ('h2');
-    questionContainer.appendChild(endPage);
-
-    const blank = document.querySelector('answer-determination');
-    blank.innerHTML = '';
-
-    endPage.innerHTML = 'All done! Your final score is ' + 'userScore + .' + 'Enter your initials to save (max 3)';
-
-    const initialBox = document.createElement('input');
-    blank.appendChild(initialBox);
-
-    const submitInitialBtn= document.createElement('button');
-    submitInitialBtn.textContent= 'Submit';
-    blank.appendChild(submitInitialBtn);
-
-    submitInitialBtn.addEventListener('click', () =>
-    { if (initialBox.value.length === 0) return false;
-        const storeInitials = (input) =>
-        {
-            const data = JSON.stringify({ "name":input[0], "score":input[1]})
-            localStorage.setItem('object', data)
-        }
-        storeInitials(initialBox.value, userScore);
-
-        const playAgain = document.createElement('button');
-        playAgain.textContent = 'Play Again!'; 
-        blank.appendChild(playAgain);
-
-        playAgain.addEventListener('click', () =>
-       {location.reload()
-    })
-    })
-
-    document.querySelector('input').value = '';
-    initialBox.addEventListener('submit', change);
-};
-
-clickStart.addEventListener('click', quiz); 
