@@ -2,7 +2,7 @@ body {
     font-family: Arial, Helvetica, sans-serif;
     text-align: center;
   }
-.wrapper {
+#wrapper {
     margin: 100px auto 0 auto;
     max-width: 600px;
   }
@@ -16,6 +16,9 @@ body {
     background-color: white;
   }
   
+  .hidden {
+    display: none;
+  }
   
   .timer {
     position: absolute;
