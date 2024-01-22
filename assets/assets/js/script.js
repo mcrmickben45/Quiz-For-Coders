@@ -44,7 +44,7 @@ window.addEventListener('DOMContentLoaded', function () {
     ];
 
     var clickStart = document.getElementById("start");
-    var clickHighScores = document.querySelector('.scores'); // Move this line up
+    var clickHighScores = document.querySelector('.scores');
     var timerEl = document.getElementById("timer");
     var timeRemaining = 60;
     var questionContainer = document.querySelector("#quiz-container");
@@ -52,6 +52,7 @@ window.addEventListener('DOMContentLoaded', function () {
     var quizDuration;
     var currentQuestionIndex = 0;
     var userScore = 0;
+
 
     function adjustTime(amount) {
         timeRemaining += amount;
@@ -63,8 +64,6 @@ window.addEventListener('DOMContentLoaded', function () {
 
     function endQuiz() {
         clearInterval(quizDuration);
-        // Your logic for ending the quiz
-        // Additional logic if needed
     }
 
     function timer() {
