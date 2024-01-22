@@ -33,10 +33,11 @@ This Coding Quiz was created by Ben McCormick following the demo provided on the
 ## Website
 https://mcrmickben45.github.io/quiz-for-coders/
 
-![Image 1]
-![Image 2]
-![Image 2]
-![Image 2]
+<img width="1426" alt="Screen Shot 2024-01-21 at 9 37 27 PM" src="https://github.com/mcrmickben45/quiz-for-coders/assets/137113252/ac1e1f26-e414-40d1-b196-db462d9adc48">
+<img width="1422" alt="Screen Shot 2024-01-21 at 9 37 34 PM" src="https://github.com/mcrmickben45/quiz-for-coders/assets/137113252/db77c7d6-2dd6-4ecb-b6e4-f01d9981102c">
+<img width="1427" alt="Screen Shot 2024-01-21 at 9 37 49 PM" src="https://github.com/mcrmickben45/quiz-for-coders/assets/137113252/7a97d4ca-64b1-42f2-870d-45b09d46d655">
+
+
 
 ## License
 N/A
